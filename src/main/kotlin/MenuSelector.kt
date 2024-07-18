@@ -33,11 +33,10 @@ class MenuSelector {
 //    }
 
     //fun <T : MenuEnum<Q>, Q : ThisIsFile> openMenuSelector(item: T) {
-    fun <T : MenuEnum<Files>> openMenuSelector(item: T) {
-    //fun openMenuSelector(item: Files) {
+    fun <T : MenuEnum> openMenuSelector(item: T) {
+        //fun openMenuSelector(item: Files) {
 
         while (true) {
-
 
             println("0. ${item.cmdName}")
 
@@ -47,7 +46,8 @@ class MenuSelector {
 
             println("${item.container.size + 1}. Выход")
 
-            val userInput =  UserInput.getInt("что вы хотите сделать")
+            //TODO Проверить ввод пользователя
+            val userInput = UserInput.getInt("что вы хотите сделать")
 
             when (userInput) {
 
@@ -55,9 +55,9 @@ class MenuSelector {
                 (item.container.size + 1) -> break
 
                 else -> {
-                    if (userInput < item.container.size){
+                    if (userInput <= item.container.size) {
                         val menuEditor = MenuEditor()
-                        menuEditor.openMenuEditor(item.container[userInput])
+                        menuEditor.openMenuEditor(item.container[userInput - 1])
                     } else {
                         println("Такой комманды нет")
                     }
