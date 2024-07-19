@@ -1,4 +1,3 @@
-
 fun main(args: Array<String>) {
 
     val menuSelector = MenuSelector()
@@ -7,4 +6,5 @@ fun main(args: Array<String>) {
 
     menuSelector.openMenuSelector(MenuEnum.Storage())
 
+    println("Ждём Вас снова, в приложении \"Заметки\"")
 }

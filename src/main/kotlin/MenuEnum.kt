@@ -8,7 +8,7 @@ sealed interface MenuEnum {
 
     //Начальное ХРАНИЛИЩЕ которое хранит АРХИВЫ
     data class Storage(
-        override val cmdName: String = "добавить архив",
+        override val cmdName: String = "Добавить архив",
         override val fullName: String = "хранилище архивов",
         override val container: MutableList<Files> = mutableListOf()
     ) : MenuEnum {
@@ -24,7 +24,7 @@ sealed interface MenuEnum {
     data class Archive(
 
         override var fileName: String,
-        override var cmdName: String = "создать заметку",
+        override var cmdName: String = "Создать заметку",
         override val fullName: String = "архив",
         override var container: MutableList<Files> = mutableListOf()
 
@@ -60,23 +60,29 @@ sealed interface MenuEnum {
             }
         }
 
-        fun menu(item: Note){
+        fun menu(item: Note) {
             while (true) {
-                println("===Меню заметки===")
-                println("1. Прочитать ${item.fullName}")
-                println("2. Изменить ${item.fullName}")
-                println("3. Выход")
-                println("==================")
+                UserInput.separateLine()
+                println("Меню заметки:")
+                println(
+                    "1. Прочитать ${item.fullName}" +
+                            "\n2. Перезаписать ${item.fullName}" +
+                            "\n3. Добавить в ${item.fullName}" +
+                            "\n4. Выход"
+                )
+                UserInput.separateLine()
 
-                when(UserInput.getInt("что требуется сделать?")){
+                when (UserInput.getInt("что требуется сделать?")) {
                     1 -> {
-                        println("---------------")
-                        println(item.text)
-                        println("---------------")
+                        UserInput.separateLine()
+                        println("Заметка:${item.fileName}\n\n ${item.text} \n")
+
                         UserInput.getString("Введите любой символ и нажмите Enter чтобы выйти из режима простмотра")
                     }
-                        2 -> UserInput.getString("Введите новый текс заметки")
-                        3 -> break
+
+                    2 -> item.text = UserInput.getString("Введите новый текст заметки")
+                    3 -> item.text += UserInput.getString("Введите что дополнить в заметку:\n ${item.text}")
+                    4 -> break
                 }
             }
         }

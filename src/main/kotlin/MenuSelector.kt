@@ -4,11 +4,12 @@ class MenuSelector {
     fun <T : MenuEnum> openMenuSelector(item: T) {
 
 
-
         while (true) {
 
+            UserInput.separateLine()
             print("Вы находитесь в ${item.fullName}")
-            if (item is MenuEnum.Archive) println(" с названием ${item.fileName}")
+            if (item is MenuEnum.Archive) print(" с названием ${item.fileName}")
+            println()
 
             println("0. ${item.cmdName}")
 
@@ -17,14 +18,14 @@ class MenuSelector {
             }
 
             println("${item.container.size + 1}. Выход")
-
-            //TODO Проверить ввод пользователя
-            val userInput = UserInput.getInt("число, что вы хотите сделать")
-            //ТИПЫ!!
-
-            if (userInput > item.container.size + 1){
+            UserInput.separateLine()
+            val userInput: Int? = UserInput.getInt("число соответствующее пункту")
+            UserInput.separateLine()
+            if (userInput == null) {
+                continue
+            } else if (userInput > item.container.size + 1) {
                 println("Такого пункта меню нет!")
-                break
+                continue
             }
 
             when (userInput) {
