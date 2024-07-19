@@ -1,11 +1,15 @@
 sealed interface MenuEnum {
 
+    //Требования к объектам у которых есть меню со списком
     val cmdName: String
     val container: MutableList<Files>
+    val fullName: String
     fun add()
 
+    //Начальное ХРАНИЛИЩЕ которое хранит АРХИВЫ
     data class Storage(
         override val cmdName: String = "добавить архив",
+        override val fullName: String = "хранилище архивов",
         override val container: MutableList<Files> = mutableListOf()
     ) : MenuEnum {
 
@@ -16,10 +20,12 @@ sealed interface MenuEnum {
 
     }
 
+    //АРХИВ который хранит в себе ЗАМЕТКИ
     data class Archive(
 
         override var fileName: String,
         override var cmdName: String = "создать заметку",
+        override val fullName: String = "архив",
         override var container: MutableList<Files> = mutableListOf()
 
     ) : Files, MenuEnum {
@@ -38,9 +44,11 @@ sealed interface MenuEnum {
 
     }
 
+    //ЗАМЕТКА
     data class Note(
         override var fileName: String,
         var text: String,
+        override val fullName: String = "заметку"
     ) : Files {
 
         companion object {
@@ -49,6 +57,27 @@ sealed interface MenuEnum {
                     UserInput.getString("имя заметки"),
                     UserInput.getString("текст заметки")
                 )
+            }
+        }
+
+        fun menu(item: Note){
+            while (true) {
+                println("===Меню заметки===")
+                println("1. Прочитать ${item.fullName}")
+                println("2. Изменить ${item.fullName}")
+                println("3. Выход")
+                println("==================")
+
+                when(UserInput.getInt("что требуется сделать?")){
+                    1 -> {
+                        println("---------------")
+                        println(item.text)
+                        println("---------------")
+                        UserInput.getString("Введите любой символ и нажмите Enter чтобы выйти из режима простмотра")
+                    }
+                        2 -> UserInput.getString("Введите новый текс заметки")
+                        3 -> break
+                }
             }
         }
     }
