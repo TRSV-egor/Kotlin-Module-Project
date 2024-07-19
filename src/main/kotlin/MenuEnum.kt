@@ -39,7 +39,10 @@ sealed interface MenuEnum {
 
         override fun add() {
             this.container.add(Note.create())
+        }
 
+        override fun changeName(newName: String) {
+            this.fileName = newName
         }
 
     }
@@ -85,6 +88,10 @@ sealed interface MenuEnum {
                     4 -> break
                 }
             }
+        }
+
+        override fun changeName(newName: String) {
+            this.fileName = newName
         }
     }
 

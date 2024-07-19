@@ -22,7 +22,7 @@ class MenuEditor {
                     }
                 }
 
-                0 -> item.fileName = UserInput.getString("Введите новое имя файла")
+                0 -> item.changeName(UserInput.getString("Введите новое имя файла"))
                 else -> {
                     println("Команда не найдена")
                 }

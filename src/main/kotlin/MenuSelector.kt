@@ -23,7 +23,7 @@ class MenuSelector {
             UserInput.separateLine()
             if (userInput == null) {
                 continue
-            } else if (userInput > item.container.size + 1) {
+            } else if (userInput > item.container.size + 1 || userInput < 0) {
                 println("Такого пункта меню нет!")
                 continue
             }
@@ -38,7 +38,7 @@ class MenuSelector {
                         val menuEditor = MenuEditor()
                         menuEditor.openMenuEditor(item.container[userInput - 1])
                     } else {
-                        println("Такой комманды нет")
+                        println("Такой команды нет")
                     }
 
                 }
