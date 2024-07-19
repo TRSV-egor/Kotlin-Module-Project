@@ -1,3 +1,10 @@
 fun main(args: Array<String>) {
-    println("Hello World!")
+
+    val menuSelector = MenuSelector()
+
+    println("Добро пожаловать в приложение \"Заметки\"")
+
+    menuSelector.openMenuSelector(MenuEnum.Storage())
+
+    println("Ждём Вас снова, в приложении \"Заметки\"")
 }
